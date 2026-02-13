@@ -1,0 +1,22 @@
+{
+  "name": "bbr-claude-skills",
+  "version": "1.0.0",
+  "description": "Community-driven skill collection for Claude Code",
+  "bin": {
+    "bbr-claude-skills": "./bin/cli.js"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "skills",
+    "ai",
+    "subagents",
+    "anthropic"
+  ],
+  "author": "BlackBodyRad",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blackbodyrad/bbr-claude-skills"
+  }
+}
