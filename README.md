@@ -9,8 +9,9 @@ Skills teach Claude Code how to handle specific tasks better. They load on-deman
 | Skill | Description |
 |-------|-------------|
 | **[subagent-orchestration](skills/subagent-orchestration/)** | Patterns for deploying subagents efficiently — parallel research, context priming, background test writing, log monitoring, memory extraction, and isolating verbose operations. |
+| **[house-party-protocol](skills/house-party-protocol/)** | Multi-agent team orchestration where agents self-organize, communicate, assist each other, and vote on best solutions. Based on the principle that better orchestration beats smarter models. |
 
-*More skills coming soon. [Contribute yours!](CONTRIBUTING.md)*
+*[Contribute yours!](CONTRIBUTING.md)*
 
 ## Install
 
