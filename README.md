@@ -9,7 +9,7 @@ Skills teach Claude Code how to handle specific tasks better. They load on-deman
 | Skill | Description |
 |-------|-------------|
 | **[subagent-orchestration](skills/subagent-orchestration/)** | Patterns for deploying subagents efficiently — parallel research, context priming, background test writing, log monitoring, memory extraction, and isolating verbose operations. |
-| **[house-party-protocol](skills/house-party-protocol/)** | Multi-agent team orchestration where agents self-organize, communicate, assist each other, and vote on best solutions. Based on the principle that better orchestration beats smarter models. |
+| **[house-party-protocol](skills/house-party-protocol/)** | Multi-agent team orchestration with study group swarming, model-per-role strategy, consensus voting, and hook-based quality gates. Goes beyond vanilla agent teams. |
 
 *[Contribute yours!](CONTRIBUTING.md)*
 
@@ -99,6 +99,20 @@ Teaches Claude Code efficient patterns for deploying subagents:
 
 **Core principle:** Your main conversation is expensive real estate. Delegate verbose, exploratory, or independent work to subagents.
 
+### House Party Protocol
+
+Multi-agent team orchestration that goes beyond vanilla agent teams:
+
+| Feature | What It Adds |
+|---------|-------------|
+| **Study Group Swarming** | Free agents join busy ones — guided subtask splitting, not random task claiming |
+| **Model-per-Role** | Opus for specialists, Sonnet for workers, Haiku for scouts |
+| **Consensus Voting** | Adversarial debate, parallel+judge, majority agreement |
+| **Quality Gates** | TeammateIdle and TaskCompleted hook enforcement |
+| **Party Compositions** | Pre-built team templates (Research, Build, Debug, Review) with model assignments |
+
+**Core principle:** Better orchestration beats smarter models. Break work into focused subtasks, let agents solve them in parallel, and when someone finishes — they join whoever needs help most.
+
 ## Project Structure
 
 ```
@@ -110,7 +124,9 @@ bbr-claude-skills/
 ├── bin/
 │   └── cli.js              # CLI entrypoint
 ├── skills/
-│   └── subagent-orchestration/
+│   ├── subagent-orchestration/
+│   │   └── SKILL.md
+│   └── house-party-protocol/
 │       └── SKILL.md
 └── docs/
     └── skill-authoring.md  # Guide for creating new skills
