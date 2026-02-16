@@ -95,8 +95,42 @@ Build a collection of battle-tested Claude Code skills that push AI agent orches
 - Identified need to differentiate from vanilla agent teams
 
 ### Session 2 (2026-02-16)
-- Full v2 rewrite of house-party-protocol
-- Added: Study Group Swarming (Rule 4), Model Selection (Rule 5), Consensus (Rule 6), Quality Gates (Rule 7)
-- Added: 4 Party Compositions with model assignments per role
-- Added: Differentiation table vs vanilla agent teams
-- Bumped to v1.2.0, updated README
+
+**house-party-protocol v2 rewrite (v1.2.0)**
+- Full v2 rewrite of house-party-protocol SKILL.md
+- Added 7 Party Rules (up from shallow v1):
+  - Rule 1: Host Sets the Table (lead in delegate mode, never codes)
+  - Rule 2: Guests Arrive Briefed (context-rich spawning with file ownership, scope, comms targets)
+  - Rule 3: Guests Talk Directly (peer-to-peer messaging, not relay through lead)
+  - Rule 4: The Study Group (core differentiator — free agents swarm to help busy ones)
+  - Rule 5: Bring the Best to the Table (Opus specialists, Sonnet workers, Haiku scouts)
+  - Rule 6: The Vote (3 consensus patterns: adversarial debate, parallel+judge, majority)
+  - Rule 7: Quality Gates (TeammateIdle + TaskCompleted hook enforcement)
+- Added 4 Party Compositions with model assignments per role:
+  - Research Party, Build Party, Debug Party, Review Party
+- Added task sizing guide and common mistakes table
+- Added differentiation table: vanilla agent teams vs House Party Protocol
+- Updated README with House Party Protocol feature table
+- Updated project structure in README to show both skills
+
+**Selective skill installation (v1.3.0)**
+- Redesigned CLI installer: users now choose which skills to install
+- Install flow: scope selection → skill selection (multi-select with `a`=all or `1,2,...`)
+- Update flow: auto-refreshes existing installed skills, then offers new ones to add/skip
+- List command shows `installed` vs `available` status per skill
+- Version command shows installed skill names
+- Tracks `installedSkills` array in `.version` metadata file
+- Refactored internals: `discoverSkills()`, `linkSkill()`, `askSkillSelection()`, `getInstalledMeta()`
+
+**Key decision:**
+
+### D7: Selective skill installation
+- **Date:** 2026-02-16
+- **Decision:** Users choose which skills to install (multi-select) rather than all-or-nothing
+- **Rationale:** With 10+ skills, users shouldn't be forced to install everything. Update should auto-refresh what they have and offer new ones separately.
+- **UX:** `a` for all, comma-separated numbers for specific, `n` to skip new on update
+
+**Releases:**
+- v1.2.0 → house-party-protocol v2 + README updates
+- v1.3.0 → selective skill installation CLI rewrite
+- Both pushed to GitHub (blackbodyrad/bbr-claude-skills) and published to npm
