@@ -124,6 +124,30 @@ Use a subagent to run the full test suite and report:
 | Running test suite | Isolate Verbose | general-purpose | No |
 | Code review after changes | Review | code-reviewer | No |
 
+## Build Verification Rule
+
+**CRITICAL:** Any subagent that modifies code MUST verify the build passes before reporting done.
+
+**Why:** Type changes, import updates, and interface modifications often cause cascading build failures in other files. A subagent that reports "done" without building leaves broken code for the main thread to fix — defeating the purpose of delegation.
+
+**How to enforce:**
+1. Always use `mode: "bypassPermissions"` for code-modifying subagents (grants Bash access for builds)
+2. Include this instruction in every code-modifying subagent prompt:
+
+```
+MANDATORY: After all edits, run the project build command and fix any errors before reporting done.
+Build command: cd /path/to/project && rm -rf .next && npm run build
+If the build fails, fix the errors and rebuild until green. Do NOT report completion with a failing build.
+```
+
+3. If the subagent cannot build (permissions, missing deps), it must explicitly state what was NOT verified
+
+**Common cascading failures to watch for:**
+- Changing a shared type/interface breaks all consumers
+- Adding imports from paths that don't exist in the installed package version
+- Narrowing `any` to a specific type without checking all call sites
+- Firestore returns Timestamps, not Dates — `any` → `Date` will break `.seconds` access
+
 ## Common Mistakes
 
 | Mistake | Fix |
@@ -134,6 +158,7 @@ Use a subagent to run the full test suite and report:
 | Launching too many parallel agents | 2-4 is optimal; more creates context pressure when results return |
 | Not specifying agent type | Use `Explore` for read-only, `general-purpose` for modifications |
 | Using foreground for long research | Background frees you to continue; foreground blocks |
+| Not requiring build verification | Always include build command in code-modifying subagent prompts |
 
 ## Agent Type Quick Reference
 
